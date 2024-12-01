@@ -1,7 +1,7 @@
 use std::{collections::HashMap, iter::zip};
 
 #[aoc(day1, part1)]
-pub fn solve_pt1(input: &str) -> i32 {
+pub fn part1(input: &str) -> i32 {
     let mut list1 = Vec::with_capacity(1000);
     let mut list2 = Vec::with_capacity(1000);
 
@@ -18,7 +18,7 @@ pub fn solve_pt1(input: &str) -> i32 {
 }
 
 #[aoc(day1, part2)]
-pub fn solve_pt2(input: &str) -> i32 {
+pub fn part2(input: &str) -> i32 {
     let mut list = Vec::with_capacity(1000);
     let mut map = HashMap::new();
 
