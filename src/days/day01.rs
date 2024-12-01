@@ -1,4 +1,6 @@
-use std::{collections::HashMap, iter::zip};
+use std::iter::zip;
+
+use rustc_hash::FxHashMap;
 
 #[aoc(day1, part1)]
 pub fn part1(input: &str) -> i32 {
@@ -20,7 +22,8 @@ pub fn part1(input: &str) -> i32 {
 #[aoc(day1, part2)]
 pub fn part2(input: &str) -> i32 {
     let mut list = Vec::with_capacity(1000);
-    let mut map = HashMap::new();
+    let mut map = FxHashMap::default();
+    map.reserve(1000);
 
     for line in input.split('\n') {
         let mut iter = line.split_ascii_whitespace();
