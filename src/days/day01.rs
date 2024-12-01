@@ -1,6 +1,7 @@
 use std::{collections::HashMap, iter::zip};
 
-pub fn solve_pt1(input: &str) {
+#[aoc(day1, part1)]
+pub fn solve_pt1(input: &str) -> i32 {
     let mut list1 = Vec::new();
     let mut list2 = Vec::new();
 
@@ -13,12 +14,11 @@ pub fn solve_pt1(input: &str) {
     list1.sort();
     list2.sort();
 
-    let total = zip(list1, list2).fold(0, |acc, (l, r)| acc + (l - r).abs());
-
-    println!("{}", total)
+    zip(list1, list2).fold(0, |acc, (l, r)| acc + (l - r).abs())
 }
 
-pub fn solve_pt2(input: &str) {
+#[aoc(day1, part2)]
+pub fn solve_pt2(input: &str) -> i32 {
     let mut list = Vec::new();
     let mut map = HashMap::new();
 
@@ -31,9 +31,6 @@ pub fn solve_pt2(input: &str) {
             .or_insert(1);
     }
 
-    let total = list
-        .iter()
-        .fold(0, |acc, l| acc + l * map.get(l).unwrap_or(&0));
-
-    println!("{}", total)
+    list.iter()
+        .fold(0, |acc, l| acc + l * map.get(l).unwrap_or(&0))
 }
