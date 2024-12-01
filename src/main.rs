@@ -1,14 +1,7 @@
-use std::{fs::File, io::Read};
+extern crate aoc_2024;
+extern crate aoc_runner;
+extern crate aoc_runner_derive;
 
-mod days;
+use aoc_runner_derive::aoc_main;
 
-fn main() {
-    let mut buf = String::new();
-
-    File::open("input/day01.txt")
-        .unwrap()
-        .read_to_string(&mut buf)
-        .unwrap();
-
-    days::day01::solve_pt2(&buf);
-}
+aoc_main! { lib = aoc_2024 }
