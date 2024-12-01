@@ -11,8 +11,8 @@ pub fn part1(input: &str) -> i32 {
         list2.push(iter.next().unwrap().parse::<i32>().unwrap());
     }
 
-    list1.sort();
-    list2.sort();
+    list1.sort_unstable();
+    list2.sort_unstable();
 
     zip(list1, list2).fold(0, |acc, (l, r)| acc + (l - r).abs())
 }
