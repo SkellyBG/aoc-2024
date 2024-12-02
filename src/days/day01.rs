@@ -55,5 +55,7 @@ pub fn part2(input: &str) -> u32 {
         map[r as usize] += 1;
     }
 
-    list.iter().fold(0, |acc, l| acc + l * map[*l as usize])
+    list.iter().fold(0, |acc, l| {
+        acc + l * { unsafe { map.get_unchecked(*l as usize) } }
+    })
 }
