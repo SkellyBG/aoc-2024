@@ -20,9 +20,7 @@ pub fn part2(input: &str) -> i32 {
                 acc.0 = true;
             } else if instruction == "don't()" {
                 acc.0 = false;
-            }
-
-            if acc.0 && instruction != "do()" && instruction != "don't()" {
+            } else if acc.0 {
                 acc.1 += l.parse::<i32>().unwrap() * r.parse::<i32>().unwrap();
             }
 
