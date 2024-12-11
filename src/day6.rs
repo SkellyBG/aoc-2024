@@ -175,7 +175,8 @@ fn has_loop(mut guard: Guard, obstructed: Vec<Vec<u8>>) -> bool {
     false
 }
 
-const example: &str = "....#.....
+#[cfg(test)]
+const EXAMPLE: &str = "....#.....
 .........#
 ..........
 ..#.......
@@ -191,11 +192,11 @@ mod tests {
 
     #[test]
     fn part1_example() {
-        assert_eq!(part1(example), 41);
+        assert_eq!(part1(EXAMPLE), 41);
     }
 
     #[test]
     fn part2_example() {
-        assert_eq!(part2(example), 6);
+        assert_eq!(part2(EXAMPLE), 6);
     }
 }
