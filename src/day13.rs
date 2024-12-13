@@ -80,32 +80,19 @@ fn part2(input: &[((i32, i32), (i32, i32), (i32, i32))]) -> i32 {
     let mut total = 0;
 
     for (a, b, prize) in input {
-        let mut pq = std::collections::BinaryHeap::new();
+        // we have a system of linear equation
+        // a.0 * x + a.1 * y = prize.0 + oop
+        // b.0 * x + b.1 * y = prize.1 + oop
 
-        let mut cache = std::collections::HashSet::new();
+        // we solve for smallest possible x
 
-        pq.push(Reverse((0, 0, 0)));
+        let det = a.0 * b.1 - a.1 * b.0;
 
-        loop {
-            let item = pq.pop().unwrap().0;
-
-            if item.0 > 400 {
-                break;
-            }
-
-            if cache.contains(&(item.1, item.2)) {
-                continue;
-            }
-            cache.insert((item.1, item.2));
-
-            if item.1 == prize.0 && item.2 == prize.1 {
-                total += item.0;
-                break;
-            }
-
-            pq.push(Reverse((item.0 + 3, item.1 + a.0, item.2 + a.1)));
-            pq.push(Reverse((item.0 + 1, item.1 + b.0, item.2 + b.1)));
+        if det == 0 {
+            eprintln!("shit");
         }
+
+        // we're guaranteed either no solutions, or 1 solution
     }
 
     total
@@ -139,6 +126,6 @@ mod tests {
 
     #[test]
     fn part2_example() {
-        assert_eq!(part2(&parse("<EXAMPLE>")), 0);
+        assert_eq!(part2(&parse(EXAMPLE)), 0);
     }
 }
