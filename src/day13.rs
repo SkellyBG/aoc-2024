@@ -111,6 +111,7 @@ fn part2(input: &[((i32, i32), (i32, i32), (i32, i32))]) -> i32 {
     total
 }
 
+#[cfg(test)]
 const EXAMPLE: &str = "Button A: X+94, Y+34
 Button B: X+22, Y+67
 Prize: X=8400, Y=5400
