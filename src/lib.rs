@@ -1,15 +1,16 @@
-mod day13;
-mod day11;
-mod day10;
-mod day9;
-mod day8;
 pub mod day1;
+mod day10;
+mod day11;
+mod day12;
+mod day13;
 pub mod day2;
 pub mod day3;
 pub mod day4;
 pub mod day5;
 pub mod day6;
 pub mod day7;
+mod day8;
+mod day9;
 
 extern crate aoc_runner;
 

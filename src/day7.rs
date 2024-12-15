@@ -48,11 +48,12 @@ fn part1(input: &[(i64, Vec<i64>)]) -> i64 {
         .iter()
         .map(|line| {
             let (total, nums) = line;
-            if is_equation_valid(*total, &nums[1..], nums[0]) {
+            let var_name = if is_equation_valid(*total, &nums[1..], nums[0]) {
                 *total
             } else {
                 0
-            }
+            };
+            var_name
         })
         .sum()
 }
