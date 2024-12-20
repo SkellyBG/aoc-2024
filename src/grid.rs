@@ -44,4 +44,25 @@ impl Grid {
 
         None
     }
+
+    pub fn find_all(&self, target: u8) -> Vec<(usize, usize)> {
+        let mut result = Vec::new();
+
+        for (x, row) in self.cells.iter().enumerate() {
+            for (y, cell) in row.iter().enumerate() {
+                if *cell == target {
+                    result.push((x, y));
+                }
+            }
+        }
+
+        result
+    }
+
+    pub fn iter(&self) -> impl Iterator<Item = (usize, usize, &u8)> {
+        self.cells
+            .iter()
+            .enumerate()
+            .flat_map(|(x, row)| row.iter().enumerate().map(move |(y, cell)| (x, y, cell)))
+    }
 }
