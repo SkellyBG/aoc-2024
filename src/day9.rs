@@ -1,40 +1,67 @@
 use aoc_runner_derive::{aoc, aoc_generator};
 
-#[derive(Clone)]
-enum FileBlock {
-    File { size: u8, id: usize },
-    FreeSpace(u8),
+#[derive(Clone, Debug, PartialEq)]
+enum Block {
+    File { id: i32 },
+    Free,
 }
 
 #[aoc_generator(day9)]
-fn parse(input: &str) -> Vec<FileBlock> {
-    let bytes = input.as_bytes();
-    bytes
-        .chunks(2)
+fn parse(input: &str) -> Vec<Block> {
+    input
+        .as_bytes()
+        .into_iter()
         .enumerate()
-        .map(|(id, chunk)| {
-            let mut a = vec![FileBlock::File {
-                size: chunk[0] - b'0',
-                id,
-            }];
-            if let Some(size) = chunk.get(1) {
-                a.push(FileBlock::FreeSpace(*size));
+        .flat_map(|(i, v)| {
+            if i % 2 == 0 {
+                vec![
+                    Block::File {
+                        id: i32::try_from(i).unwrap() / 2,
+                    };
+                    usize::from(*v - b'0')
+                ]
+            } else {
+                vec![Block::Free; usize::from(*v - b'0')]
             }
-            a
         })
-        .flatten()
         .collect()
 }
 
 #[aoc(day9, part1)]
-fn part1(input: &Vec<FileBlock>) -> i32 {
+fn part1(input: &Vec<Block>) -> i64 {
     let mut input = input.clone();
 
-    loop {}
+    let mut left_idx = 0;
+    let mut right_idx = input.len() - 1;
+
+    loop {
+        while let Some(Block::File { .. }) = input.get(left_idx) {
+            left_idx += 1;
+        }
+
+        while let Some(Block::Free) = input.get(right_idx) {
+            right_idx -= 1;
+        }
+
+        if right_idx <= left_idx {
+            break;
+        }
+
+        input.swap(left_idx, right_idx);
+    }
+
+    input
+        .iter()
+        .enumerate()
+        .map(|(idx, b)| match b {
+            Block::File { id } => i64::try_from(idx).unwrap() * i64::from(*id),
+            Block::Free => 0,
+        })
+        .sum()
 }
 
 #[aoc(day9, part2)]
-fn part2(input: &Vec<FileBlock>) -> String {
+fn part2(_input: &Vec<Block>) -> String {
     todo!()
 }
 
