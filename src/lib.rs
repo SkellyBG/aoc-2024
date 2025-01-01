@@ -1,3 +1,4 @@
+mod day22;
 mod day18;
 mod day17;
 pub mod day1;
